@@ -7,7 +7,12 @@ authors = [
     { name = "hn-minh", email = "nminh792004@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "datasketch>=2.0.0",
+    "python-dotenv>=1.2.3",
+    "requests>=2.34.2",
+    "tqdm>=4.70.1",
+]
 
 [project.scripts]
 code-suggester = "code_suggester:main"
@@ -15,3 +20,8 @@ code-suggester = "code_suggester:main"
 [build-system]
 requires = ["uv_build>=0.12.10,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "jupyterlab>=4.6.3",
+]
