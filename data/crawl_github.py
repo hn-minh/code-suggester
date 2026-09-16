@@ -6,9 +6,9 @@ from time import sleep
 from configs.config import settings
 
 GITHUB_TOKEN = settings.GITHUB_TOKEN
-SEARCH_QUERY = "fastapi rag language:python" 
-MAX_REPOS = 50
-OUTPUT_DIR = "./raw_github_data"
+SEARCH_QUERY = "fastapi agents llms language:python" 
+MAX_REPOS = 10
+OUTPUT_DIR = "data/raw/git_repos"
 
 HEADERS = {
     "Authorization": f"token {GITHUB_TOKEN}",
@@ -87,7 +87,7 @@ if __name__ == "__main__":
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
     target_repos = search_repositories(SEARCH_QUERY, MAX_REPOS)
-    print(f"Found len(target_repos)} repositories.\n")
+    print(f"Found {len(target_repos)} repositories.\n")
     
     for repo in target_repos:
         download_and_extract_repo(repo, OUTPUT_DIR)
