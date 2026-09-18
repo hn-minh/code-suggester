@@ -3,7 +3,7 @@ import requests
 import zipfile
 import io
 from time import sleep
-from configs.config import settings
+from configs.env import settings
 
 GITHUB_TOKEN = settings.GITHUB_TOKEN
 SEARCH_QUERY = "fastapi agents llms language:python" 

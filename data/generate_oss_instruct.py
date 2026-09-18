@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 from openai import AsyncOpenAI
 from tqdm.asyncio import tqdm_asyncio
-from configs.config import settings
+from configs.env import settings
 
 OPENAI_API_KEY = settings.OPENAI_API_KEY
 client = AsyncOpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
