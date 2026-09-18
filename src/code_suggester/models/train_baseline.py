@@ -114,11 +114,9 @@ def main():
     used_memory = round(torch.cuda.max_memory_reserved() / 1024 / 1024 / 1024, 3)
     memory_pct = round((used_memory / max_memory) * 100, 3)
 
-    wandb.log({
-        "system/training_duration_minutes": training_duration_minutes,
-        "system/peak_gpu_memory_gb": used_memory,
-        "system/peak_gpu_memory_percent": memory_pct
-    })
+    wandb.run.summary["system/training_duration_minutes"] = training_duration_minutes
+    wandb.run.summary["system/peak_gpu_memory_gb"] = used_memory
+    wandb.run.summary["system/peak_gpu_memory_percent"] = memory_pct
 
     print(f"Training completed in {training_duration_minutes:.2f} minutes.")
     print(f"Peak GPU Memory used: {used_memory} GB ({memory_pct}%)")
