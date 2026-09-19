@@ -9,7 +9,7 @@ from unsloth import FastLanguageModel
 from unsloth.chat_templates import get_chat_template
 from trl import SFTTrainer, SFTConfig
 
-from src.code_suggester.utils.utils import load_config, load_dataset
+from src.code_suggester.utils.utils import load_config, format_dataset
 
 def main():
     parser = argparse.ArgumentParser(description="Unsloth Configurable SFT Training Script")
