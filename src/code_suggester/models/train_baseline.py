@@ -9,8 +9,7 @@ from unsloth import FastLanguageModel
 from unsloth.chat_templates import get_chat_template
 from trl import SFTTrainer, SFTConfig
 
-from src.code_suggester.utils.utils import load_config, format_dataset
-
+from src.code_suggester.utils.utils import load_config, load_dataset
 
 def main():
     parser = argparse.ArgumentParser(description="Unsloth Configurable SFT Training Script")
@@ -67,7 +66,11 @@ def main():
         "test": val_test["test"]
     })
     
-    formatted_dataset = format_dataset(dataset, tokenizer)
+    formatted_dataset = format_dataset(
+        dataset, 
+        tokenizer, 
+        system_prompt=config["data"]["system_prompt"]
+    )
 
     training_args = config["training"]
     OUTPUT_DIR = Path(training_args["output_dir"])
