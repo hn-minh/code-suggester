@@ -21,7 +21,7 @@ lora:
   loftq_config: null
 
 data:
-  dataset_name: "data/processed/magicoder_instruct_dataset.jsonl"
+  dataset_name: "magicoder_instruct_dataset.jsonl"
   system_prompt: |
     You are an elite AI Backend Engineer. Your sole task is to translate natural language requirements into precise, production-grade Python code for AI systems (e.g., FastAPI, SQLAlchemy, Vector databases, LLM integrations).
 
@@ -46,6 +46,6 @@ training:
   evaluation_strategy: "steps"
   eval_steps: 20
   save_strategy: "steps"
-  save_steps: 500
-  load_best_model_at_end: false
+  save_steps: 20
+  load_best_model_at_end: true
   optim: "adamw_torch_fused"

@@ -1,0 +1,32 @@
+project: "sft-code-suggestion"
+name: "lora-hyperparam-grid-sweep"
+method: grid
+metric:
+  goal: minimize
+  name: eval/loss
+
+parameters:
+  lora:
+    parameters:
+      r:
+        values: [8, 16, 32]
+      target_modules:
+        values:
+          - ["q_proj", "k_proj", "v_proj"]
+          - ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
+  training:
+    parameters:
+      learning_rate:
+        values: [0.0001, 0.0002, 0.0005]
+      num_train_epochs:
+        values: [2, 4]
+
+command:
+  - ${env}
+  - python
+  - ${program}
+  - "--config"
+  - "baseline.yaml"
+
+program: sweep.py
