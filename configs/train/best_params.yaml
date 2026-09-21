@@ -1,0 +1,57 @@
+
+project_name: "sft-code-suggestion"
+run_name: "qwen2.5-coder-7B-base-lora"
+seed: 42
+
+model:
+  base_model: "Qwen/Qwen2.5-Coder-7B-Instruct"
+  max_seq_length: 2048
+  dtype: "bfloat16"
+  load_in_4bit: false
+
+lora:
+  r: 32
+  lora_alpha: 32
+  lora_dropout: 0
+  bias: "none"
+  use_gradient_checkpointing: true
+  target_modules: 
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+  use_rslora: false
+  loftq_config: null
+
+data:
+  dataset_name: "data/processed/magicoder_instruct_dataset.jsonl"
+  system_prompt: |
+    You are an elite AI Backend Engineer. Your sole task is to translate natural language requirements into precise, production-grade Python code for AI systems (e.g., FastAPI, SQLAlchemy, Vector databases, LLM integrations).
+
+    Strict Output Rules:
+    1. Output ONLY the raw Python code.
+    2. Do NOT use markdown code blocks (e.g., do not wrap the output in ```python ... ``` or ```).
+    3. Do NOT provide any explanations, context, warnings, or conversational filler (e.g., do not say "Here is the code:" or "Sure!").
+    4. Enforce production best practices implicitly: utilize async/await for I/O-bound operations, include strict type hints, ensure proper resource management (e.g., context managers for database sessions), and never block the event loop.
+
+training:
+  output_dir: "./checkpoints"
+  num_train_epochs: 2
+  per_device_train_batch_size: 2
+  per_device_eval_batch_size: 2
+  gradient_accumulation_steps: 8
+  learning_rate: 5.0e-4
+  weight_decay: 0.01
+  warmup_steps: 100
+  fp16: false
+  bf16: true
+  logging_steps: 20
+  evaluation_strategy: "steps"
+  eval_steps: 20
+  save_strategy: "steps"
+  save_steps: 20
+  load_best_model_at_end: true
+  optim: "adamw_torch_fused"

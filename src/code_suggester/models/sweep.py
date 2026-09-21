@@ -1,4 +1,3 @@
-import os
 import argparse
 import time
 import torch
@@ -14,7 +13,6 @@ from trl import SFTTrainer, SFTConfig
 from src.code_suggester.utils.utils import load_config, format_dataset
 
 def main():
-    os.environ["WANDB_SILENT"] = "true"
     transformers.logging.set_verbosity_error()
 
     parser = argparse.ArgumentParser(description="Unsloth Configurable SFT Training Script")
@@ -52,7 +50,7 @@ def main():
         model,
         r=active_config["lora"]["r"],
         target_modules=active_config["lora"]["target_modules"],
-        lora_alpha=active_config["lora"]["r"],  # Scale alpha tự động theo r
+        lora_alpha=active_config["lora"]["r"],
         lora_dropout=active_config["lora"]["lora_dropout"],
         bias=active_config["lora"]["bias"],
         use_gradient_checkpointing=active_config["lora"]["use_gradient_checkpointing"],
