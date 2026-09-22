@@ -10,5 +10,6 @@ wheels/
 .venv
 .env
 
-data/raw/git_repos
+data/raw/
+data/processed/
 *.jsonl
