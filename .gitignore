@@ -13,3 +13,6 @@ wheels/
 data/raw/
 data/processed/
 *.jsonl
+
+unsloth_compiled_cache/
+artifacts/
